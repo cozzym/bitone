@@ -245,14 +245,14 @@ def main():
 
         price_source_1 = st.radio(
             "Select Price Source for Scenario 1:",
-            ("Manual", "Live Price", "Price at 75% LTV"),  # Changed here
+            ("Manual", "Live Price", "Price at 70% LTV"),
             horizontal=True
         )
 
         if price_source_1 == "Live Price":
             price_1 = BitcoinLoanCalculator.get_live_price() or 15000.0
-        elif price_source_1 == "Price at 75% LTV":
-            price_1 = loan_amount / (loan_state.btc_collateral * 0.75)  # Changed calculation here
+        elif price_source_1 == "Price at 70% LTV":
+            price_1 = loan_amount / (loan_state.btc_collateral * 0.70)
         else:
             price_1 = st.number_input(
                 "Bitcoin Price for Scenario 1 (€)",
@@ -319,7 +319,7 @@ def main():
 
     st.markdown("---")
 
-    # Second Rebalancing Scenario
+    # Second Rebalancing Scenario with similar styling
     st.markdown("""
         <div style='background-color: var(--background-color); padding: 2rem; border-radius: 1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1);'>
         <h2>🔄 Second Rebalancing Scenario</h2>
@@ -338,14 +338,14 @@ def main():
 
         price_source_2 = st.radio(
             "Select Price Source for Scenario 2:",
-            ("Manual", "Live Price", "Price at 75% LTV", "Price at 65% LTV"),  # Changed here
+            ("Manual", "Live Price", "Price at 70% LTV", "Price at 65% LTV"),
             horizontal=True
         )
 
         if price_source_2 == "Live Price":
             price_2 = BitcoinLoanCalculator.get_live_price() or 10000.0
-        elif price_source_2 == "Price at 75% LTV":
-            price_2 = loan_amount / (loan_state.btc_collateral * 0.75)  # Changed calculation here
+        elif price_source_2 == "Price at 70% LTV":
+            price_2 = loan_amount / (loan_state.btc_collateral * 0.70)
         elif price_source_2 == "Price at 65% LTV":
             price_2 = loan_amount / (loan_state.btc_collateral * 0.65)
         else:
@@ -438,7 +438,7 @@ def main():
         col1, col2 = st.columns(2)
         
         with col1:
-            # Price at 70% LTV section - This section remains for comparison
+            # Price at 70% LTV section
             btc_collateral = loan_state.btc_collateral
             price_at_70_ltv = loan_state.loan_amount / (btc_collateral * 0.70)
             price_drop_70 = calculate_price_drop(initial_price, price_at_70_ltv)
